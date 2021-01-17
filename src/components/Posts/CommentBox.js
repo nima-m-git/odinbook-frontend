@@ -46,4 +46,4 @@ const CommentBox = ({ postId, refresh }) => {
   );
 };
 
-export default CommentBox;
+export { CommentBox };

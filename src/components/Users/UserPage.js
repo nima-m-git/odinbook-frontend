@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Post } from "../index";
@@ -9,14 +9,14 @@ const UserPage = () => {
   const [user, setUser] = useState();
   const [error, setError] = useState(null);
 
-  const getUser = () => {
+  const getUser = useCallback(() => {
     axios
       .get(`/${userId}`)
       .then((res) => setUser(res.user))
       .catch((err) => setError(err));
-  };
+  }, [userId]);
 
-  useEffect(() => getUser(), []);
+  useEffect(() => getUser(), [getUser]);
 
   return (
     <div className="userPage">

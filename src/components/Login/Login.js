@@ -2,11 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 
 import "./Login.scss";
+import { Signup } from "./Signup";
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState(null);
+  const [signupPopup, setSignupPopup] = useState(false);
 
   const checkCredentials = (e) => {
     e.preventDefault();
@@ -17,41 +19,42 @@ const Login = ({ setToken }) => {
         password,
       })
       .then((res) => {
-        if (res.token) {
-          setToken(res.token);
-        }
-        setErrors([res?.msg]);
-      });
+        setError(res?.data?.message);
+        setToken(res?.data?.token);
+      })
+      .catch((err) => setError(err.message));
   };
 
   return (
-    <form className="login-form" onSubmit={checkCredentials}>
-      <h2 className="form-title">Login</h2>
-      {errors.map((error, i) => (
-        <div className="error" key={i}>
-          - {error}
+    <div>
+      <form className="login-form" onSubmit={checkCredentials}>
+        <h2 className="form-title">Login</h2>
+        {error && <div className="error">- {error}</div>}
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="submit">Submit</button>
+        <div className="signup-btn" onClick={() => setSignupPopup(true)}>
+          Sign Up
         </div>
-      ))}
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </form>
+      {signupPopup && <Signup closePopup={() => setSignupPopup(false)} />}
+    </div>
   );
 };
 

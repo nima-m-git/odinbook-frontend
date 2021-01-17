@@ -46,4 +46,4 @@ const PostForm = ({ refresh }) => {
   );
 };
 
-export default PostForm;
+export { PostForm };

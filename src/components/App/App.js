@@ -19,7 +19,8 @@ const App = () => {
 
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
+    // axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
+    axios.defaults.baseURL = "http://localhost:3000/";
   }, [token]);
 
   return (

@@ -1,16 +1,16 @@
+import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ closePopup }) => {
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState(null);
   const [inputs, setInputs] = useState({
-    username: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const history = useHistory();
 
   const handleChange = (e) => {
     setInputs((old) => ({
@@ -22,24 +22,21 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(process.env.REACT_APP_BE_URL + "/users/signup", {
-      method: "POST",
-      body: JSON.stringify(inputs),
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
+    axios
+      .post("/signup", {
+        ...inputs,
+      })
       .then((result) => {
-        setMessage(result?.message);
+        setMessage(result?.data.message);
 
         if (result?.errors) {
           setErrors([...result?.errors]);
         } else {
           setErrors([]);
-          setTimeout(() => history.push("/login"), 2000);
+          setTimeout(() => closePopup(), 1000);
         }
-      });
+      })
+      .catch((err) => setErrors([...err.response.data.errors]));
   };
 
   return (
@@ -52,11 +49,20 @@ const Signup = () => {
       ))}
       {message && <div className="message">{message}</div>}
       <label>
-        Username:
+        First Name:
         <input
           type="text"
-          name="username"
-          value={inputs.username}
+          name="firstName"
+          value={inputs.firstName}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Last Name:
+        <input
+          type="text"
+          name="lastName"
+          value={inputs.lastName}
           onChange={handleChange}
         />
       </label>
@@ -92,4 +98,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export { Signup };
