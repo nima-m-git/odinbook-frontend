@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5em;
+  padding: 1.2em;
+  background: rgba(174, 199, 162, 0.548);
+  box-shadow: 0 0 10px 1px rgba(158, 151, 151, 0.4);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 38px;
+}
+
+h1,
+.link {
+  color: rgb(61, 57, 57);
+}
+
+.navbar {
+  text-align: end;
+
+  .link {
+    cursor: pointer;
+    text-decoration: none;
+    transition: font-size 0.3s;
+    width: 70px;
+    font-size: 18px;
+    margin: 0.8em;
+
+    &:hover {
+      color: rgb(150, 150, 150);
+    }
+  }
+}
