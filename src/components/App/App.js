@@ -4,11 +4,11 @@ import axios from "axios";
 
 import {
   PostIndex,
-  Post,
   Login,
   HeaderNav,
-  // UserIndex,
-  // UserPage,
+  UserIndex,
+  UserPage,
+  PostPage,
 } from "../index";
 import "./App.scss";
 
@@ -31,6 +31,9 @@ const App = () => {
           <HeaderNav {...{ setToken }} />
           <Route path={["/", "/posts"]} exact>
             <PostIndex />
+          </Route>
+          <Route path="/posts/:postId">
+            <PostPage />
           </Route>
           <Route path="/users" exact>
             <UserIndex />
