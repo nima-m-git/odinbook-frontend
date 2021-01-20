@@ -13,36 +13,43 @@ import {
 import "./App.scss";
 
 const App = () => {
-  const [token, setToken] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const [token, setToken] = useState(null);
   // const [errors, setErrors] = useState(null);
   // const [messages, setMessages] = useState(null);
 
-  useEffect(() => {
+  const setHeaders = (token) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    setLoggedIn(true);
+  };
+
+  useEffect(() => {
     // axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
     axios.defaults.baseURL = "http://localhost:3000/";
-  }, [token]);
+  }, []);
 
   return (
     <div className="app">
-      {!token ? (
-        <Login {...{ setToken }} />
+      {!loggedIn ? (
+        <Login {...{ setHeaders }} />
       ) : (
-        <Switch>
-          <HeaderNav {...{ setToken }} />
-          <Route path={["/", "/posts"]} exact>
-            <PostIndex />
-          </Route>
-          <Route path="/posts/:postId">
-            <PostPage />
-          </Route>
-          <Route path="/users" exact>
-            <UserIndex />
-          </Route>
-          <Route path="/users/:userId">
-            <UserPage />
-          </Route>
-        </Switch>
+        <div className="container">
+          <HeaderNav logout={() => setLoggedIn(false)} />
+          <Switch>
+            <Route path={["/", "/posts"]} exact>
+              <PostIndex />
+            </Route>
+            <Route path="/posts/:postId">
+              <PostPage />
+            </Route>
+            <Route path="/users" exact>
+              <UserIndex />
+            </Route>
+            <Route path="/users/:userId">
+              <UserPage />
+            </Route>
+          </Switch>
+        </div>
       )}
     </div>
   );

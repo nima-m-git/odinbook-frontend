@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import "./HeaderNav.scss";
 
-const HeaderNav = ({ setToken }) => (
+const HeaderNav = ({ logout }) => (
   <header className="header">
     <Link to="/">
       <header>
@@ -16,7 +16,7 @@ const HeaderNav = ({ setToken }) => (
       <Link className="link" to="/users/me">
         Me
       </Link>
-      <div className="link" onClick={() => setToken(null)}>
+      <div className="link" onClick={logout}>
         Logout
       </div>
     </nav>

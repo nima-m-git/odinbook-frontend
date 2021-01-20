@@ -1,22 +1,24 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 
 import { PostForm } from "./PostForm";
 import { Post } from "./Post";
 
 const PostIndex = () => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
 
   const getPosts = () => {
     axios
       .get("/posts")
       .then((res) => {
-        setPosts(res.posts);
-        setError(res?.err);
+        console.log("gettingf data");
+        const posts = res.data.posts;
+        console.log(posts);
+        setPosts(posts);
+        setError(res?.data.err);
       })
-      .catch((err) => setError(err));
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -27,9 +29,22 @@ const PostIndex = () => {
     <div className="posts-container">
       {error && <div className="error">{error}</div>}
       <PostForm refresh={getPosts} />
-      {posts.map((post) => (
-        <Post {...{ post }} refresh={getPosts} />
-      ))}
+      {posts.map((post) => {
+        console.log(post);
+        return (
+          <Post
+            // _id={post._id}
+            // authorFullName={post.author.fullName}
+            // content={post.content}
+            // liked={post.liked}
+            // likes={post?.likes}
+            // comments={[post?.comments]}
+            {...{ post }}
+            refresh={getPosts}
+            key={post._id}
+          />
+        );
+      })}
     </div>
   );
 };

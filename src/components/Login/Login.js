@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./Login.scss";
 import { Signup } from "./Signup";
 
-const Login = ({ setToken }) => {
+const Login = ({ setHeaders }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -20,7 +20,8 @@ const Login = ({ setToken }) => {
       })
       .then((res) => {
         setError(res?.data?.message);
-        setToken(res?.data?.token);
+        const token = res?.data?.token;
+        if (!!token) setHeaders(token);
       })
       .catch((err) => setError(err.message));
   };
