@@ -27,7 +27,7 @@ const UserCard = ({ user }) => {
       .catch((err) => setError(err));
   };
 
-  const StatusBtn = ({ status }) => {
+  const StatusBtn = (status) => {
     switch (status) {
       case undefined:
         return (
