@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 
 const UserCard = ({ user }) => {
@@ -71,7 +72,10 @@ const UserCard = ({ user }) => {
     <div className="user-card">
       {message && <div className="message">{message}</div>}
       {error && <div className="error">{error}</div>}
-      <div className="name">{user.fullName}</div>
+
+      <Link to={`/users/${user._id}`}>
+        <div className="name">{user.fullName}</div>
+      </Link>
       <div className="status">{StatusBtn(user.friendsStatus)}</div>
       <br></br>
     </div>
