@@ -21,14 +21,16 @@ const Post = ({ refresh, post }) => {
     refresh();
   };
 
+  console.log(post);
+
   return (
-    <div className="post">
+    <div
+      className="post"
+      style={{ border: "1px solid black", width: "500px", margin: "2em" }}
+    >
       <div className="post-info">
         <div className="author">{post.author.fullName}</div>
-        <p className="content">
-          {post.content}
-          meow
-        </p>
+        <p className="content">{post.content}</p>
         <div className="flex-bar">
           <button className="like" onClick={likePost}>
             {post.liked}
@@ -51,7 +53,6 @@ const Post = ({ refresh, post }) => {
           [...post.comments]
             .sort((a, b) => (a.dateAdded > b.dateAdded ? 1 : -1))
             .map((comment) => {
-              console.log(comment.author, comment.author.fullName);
               return (
                 <div className="comment" key={comment._id}>
                   <div className="author">{comment.author.fullName}</div>

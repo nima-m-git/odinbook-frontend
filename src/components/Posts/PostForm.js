@@ -2,29 +2,20 @@ const { default: axios } = require("axios");
 const { useState } = require("react/cjs/react.development");
 
 const PostForm = ({ refresh }) => {
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState(null);
-
-  const handleResult = (result) => {
-    setErrors(
-      result?.errors
-        ? result.errors.map((err) => err.msg)
-        : result?.err
-        ? [result.err]
-        : []
-    );
-  };
+  const [content, setContent] = useState("");
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post(`/posts/`, {
-        content: message,
+        content: content,
       })
-      .then((res) => handleResult(res))
-      .catch((err) => setErrors([...errors, err.response.data.err]));
+      .then((res) => setMessage(res.data.msg))
+      .catch((err) => setError(err.response.data.err));
 
-    setMessage("");
+    setContent("");
     refresh();
   };
 
@@ -33,15 +24,16 @@ const PostForm = ({ refresh }) => {
       <label>
         Whats on your mind?
         <textarea
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
           rows={5}
           // cols={40}
           maxLength={500}
         />
       </label>
       <button className="submit-btn">Submit</button>
-      {errors && errors.map((error) => <div className="error">{error}</div>)}
+      {message && <div className="message">{message}</div>}
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };

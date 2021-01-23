@@ -6,13 +6,13 @@ import { Post } from "../index";
 
 const UserPage = () => {
   const { userId } = useParams();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   const getUser = useCallback(() => {
     axios
-      .get(`/${userId}`)
-      .then((res) => setUser(res.user))
+      .get(`/users/${userId}`)
+      .then((res) => setUser(res.data.user))
       .catch((err) => setError(err.response.data.err));
   }, [userId]);
 
@@ -21,12 +21,18 @@ const UserPage = () => {
   return (
     <div className="userPage">
       {error && <div className="error">{error}</div>}
-      <div className="fullName">{user.fullName}</div>
-      <div className="posts-container">
-        {user.posts.map((post) => (
-          <Post {...post} />
-        ))}
-      </div>
+      {user && (
+        <div>
+          <div className="fullName">{user.fullName}</div>
+          <div className="posts-container">
+            {user.posts.length > 0 ? (
+              user.posts.map((post) => <Post {...{ post }} key={post._id} />)
+            ) : (
+              <p>No posts to show</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

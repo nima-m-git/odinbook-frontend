@@ -1,8 +1,19 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./HeaderNav.scss";
 
 const HeaderNav = ({ logout }) => {
+  const [user, setUser] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("/users/me")
+      .then((res) => setUser(res.data.user))
+      .catch((err) => console.log(err.response.data.err));
+  }, []);
+
   return (
     <header className="header">
       <Link to="/">
@@ -14,8 +25,8 @@ const HeaderNav = ({ logout }) => {
         <Link className="link" to="/users">
           Users
         </Link>
-        <Link className="link" to="/users/me">
-          Me
+        <Link className="link" to={`/users/${user._id}`}>
+          {user.fullName}
         </Link>
         <div className="link" onClick={logout}>
           Logout

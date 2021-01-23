@@ -9,9 +9,7 @@ const UserCard = ({ user }) => {
     axios
       .post(`/users/requests/${userId}`)
       .then((res) => {
-        console.log(res);
         setMessage(res?.data?.msg);
-        setError(res?.data?.err);
       })
       .catch((err) => {
         setError(err.response.data.msg);
@@ -25,10 +23,12 @@ const UserCard = ({ user }) => {
         requestResponse,
       })
       .then((res) => {
-        setMessage(res?.msg);
-        setError(res?.err);
+        setMessage(res?.data.msg);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setError(err.response.data.msg);
+        console.log(err.response);
+      });
   };
 
   const StatusBtn = (status) => {

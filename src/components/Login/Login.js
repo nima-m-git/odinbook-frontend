@@ -23,7 +23,7 @@ const Login = ({ setHeaders }) => {
         const token = res?.data?.token;
         if (!!token) setHeaders(token);
       })
-      .catch((err) => setError(err.response.data.message));
+      .catch((err) => console.log(err.response || err));
   };
 
   return (
