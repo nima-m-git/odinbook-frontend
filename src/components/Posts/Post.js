@@ -15,13 +15,11 @@ const ExpandLikes = ({ post }) => (
 const Post = ({ refresh, post }) => {
   const [expandLikes, setExpandLikes] = useState(false);
 
-  const likePost = (e) => {
+  const likePost = async (e) => {
     e.preventDefault();
-    axios.put(`/${post._id}/like`);
+    await axios.put(`/${post._id}/like`);
     refresh();
   };
-
-  console.log(post);
 
   return (
     <div

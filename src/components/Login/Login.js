@@ -12,7 +12,6 @@ const Login = ({ setHeaders }) => {
 
   const checkCredentials = (e) => {
     e.preventDefault();
-
     axios
       .post("/login", {
         email,

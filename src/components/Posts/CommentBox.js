@@ -15,9 +15,9 @@ const CommentBox = ({ postId, refresh }) => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(`/posts/${postId}`, {
         content: comment,
       })

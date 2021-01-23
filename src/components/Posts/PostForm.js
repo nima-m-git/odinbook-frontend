@@ -6,9 +6,9 @@ const PostForm = ({ refresh }) => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(`/posts/`, {
         content: content,
       })
