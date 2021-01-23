@@ -13,7 +13,7 @@ const UserPage = () => {
     axios
       .get(`/${userId}`)
       .then((res) => setUser(res.user))
-      .catch((err) => setError(err));
+      .catch((err) => setError(err.response.data.err));
   }, [userId]);
 
   useEffect(() => getUser(), [getUser]);

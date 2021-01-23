@@ -14,7 +14,7 @@ const UserIndex = () => {
         setUsers(res.data.users);
         setError(res?.data.err);
       })
-      .catch((err) => setError(err));
+      .catch((err) => setError(err.response.data.err));
   }, []);
 
   useEffect(() => {

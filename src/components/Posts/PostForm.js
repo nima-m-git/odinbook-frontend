@@ -22,7 +22,7 @@ const PostForm = ({ refresh }) => {
         content: message,
       })
       .then((res) => handleResult(res))
-      .catch((err) => setErrors([...errors, err]));
+      .catch((err) => setErrors([...errors, err.response.data.err]));
 
     setMessage("");
     refresh();

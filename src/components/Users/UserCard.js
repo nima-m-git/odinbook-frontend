@@ -7,17 +7,21 @@ const UserCard = ({ user }) => {
 
   const addFriend = (userId) => {
     axios
-      .post(`/request/${userId}`)
+      .post(`/users/requests/${userId}`)
       .then((res) => {
-        setMessage(res?.msg);
-        setError(res?.err);
+        console.log(res);
+        setMessage(res?.data?.msg);
+        setError(res?.data?.err);
       })
-      .catch((err) => setError(err));
+      .catch((err) => {
+        setError(err.response.data.msg);
+        console.log(err.response);
+      });
   };
 
   const respondRequest = (requestResponse) => {
     axios
-      .put(`/request/${user._id}`, {
+      .put(`/users/requests/${user._id}`, {
         requestResponse,
       })
       .then((res) => {
@@ -29,6 +33,8 @@ const UserCard = ({ user }) => {
 
   const StatusBtn = (status) => {
     switch (status) {
+      // allow request after denied for the moment
+      case "denied":
       case undefined:
         return (
           <div className="addFriend-status" onClick={() => addFriend(user._id)}>
@@ -52,7 +58,7 @@ const UserCard = ({ user }) => {
             </div>
           </div>
         );
-      case "friends":
+      case "accepted":
         return <div className="friends-status">Friends</div>;
       case "pending":
         return <div className="pending-status">Pending..</div>;
@@ -66,7 +72,8 @@ const UserCard = ({ user }) => {
       {message && <div className="message">{message}</div>}
       {error && <div className="error">{error}</div>}
       <div className="name">{user.fullName}</div>
-      <div className="status">{StatusBtn(user.status)}</div>
+      <div className="status">{StatusBtn(user.friendsStatus)}</div>
+      <br></br>
     </div>
   );
 };
