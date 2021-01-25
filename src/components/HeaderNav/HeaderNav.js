@@ -11,7 +11,7 @@ const HeaderNav = ({ logout }) => {
     axios
       .get("/users/me")
       .then((res) => setUser(res.data.user))
-      .catch((err) => console.log(err.response.data.err));
+      .catch((err) => console.log(err?.response?.data?.err || err.request));
   }, []);
 
   return (

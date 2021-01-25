@@ -34,7 +34,7 @@ const UserCard = ({ user }) => {
 
   const StatusBtn = (status) => {
     switch (status) {
-      // allow request after denied for the moment
+      // allow request after denied, for the moment
       case "denied":
       case undefined:
         return (
@@ -73,6 +73,9 @@ const UserCard = ({ user }) => {
       {message && <div className="message">{message}</div>}
       {error && <div className="error">{error}</div>}
 
+      <div className="profilePic">
+        <img src={user?.image} alt="profile pic" />
+      </div>
       <Link to={`/users/${user._id}`}>
         <div className="name">{user.fullName}</div>
       </Link>

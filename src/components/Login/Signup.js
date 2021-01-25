@@ -10,24 +10,43 @@ const Signup = ({ closePopup }) => {
     email: "",
     password: "",
     confirmPassword: "",
+    image: null,
   });
 
   const handleChange = (e) => {
+    if (e.target.name == "image") {
+      console.log(e.target.files[0]);
+    }
+
     setInputs((old) => ({
       ...old,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.name == "image" ? e.target.files[0] : e.target.value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log({ ...inputs });
+
+    const formData = new FormData();
+    for (let input in inputs) {
+      formData.append([input], inputs[input]);
+    }
+
     axios
-      .post("/signup", {
-        ...inputs,
-      })
+      .post(
+        "/signup",
+        formData,
+        {}
+        // {
+        //   ...inputs,
+        // }
+      )
       .then((result) => {
         setMessage(result?.data.message);
+        console.log(result);
 
         if (result?.errors) {
           setErrors([...result?.errors]);
@@ -36,11 +55,18 @@ const Signup = ({ closePopup }) => {
           setTimeout(() => closePopup(), 1000);
         }
       })
-      .catch((err) => setErrors([...err.response.data.errors]));
+      .catch((err) => {
+        console.log(err.response.data.err || err.response);
+        setErrors([...err.response?.data?.errors] || err.response);
+      });
   };
 
   return (
-    <form className="signup-form" onSubmit={handleSubmit}>
+    <form
+      className="signup-form"
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+    >
       <h2 className="form-title">Signup</h2>
       {errors.map((error, i) => (
         <div className="error" key={i}>
@@ -92,6 +118,10 @@ const Signup = ({ closePopup }) => {
           value={inputs.confirmPassword}
           onChange={handleChange}
         />
+      </label>
+      <label>
+        Profile Picture
+        <input type="file" name="image" onChange={handleChange}></input>
       </label>
       <button type="submit">Submit</button>
     </form>

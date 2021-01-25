@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { CommentBox } from "./CommentBox";
 
 const ExpandLikes = ({ post }) => (
@@ -27,7 +28,10 @@ const Post = ({ refresh, post }) => {
       style={{ border: "1px solid black", width: "500px", margin: "2em" }}
     >
       <div className="post-info">
-        <div className="author">{post.author.fullName}</div>
+        <Link to={`/users/${post.author._id}`}>
+          <div className="author">{post.author.fullName}</div>
+        </Link>
+
         <p className="content">{post.content}</p>
         <div className="flex-bar">
           <button className="like" onClick={likePost}>
@@ -46,14 +50,14 @@ const Post = ({ refresh, post }) => {
         </div>
       </div>
       <div className="comments">
-        <CommentBox refresh={refresh} postId={post._id} />
-        {post?.comments &&
+        <CommentBox {...{ refresh }} postId={post._id} />
+        {post.comments.length &&
           [...post.comments]
             .sort((a, b) => (a.dateAdded > b.dateAdded ? 1 : -1))
             .map((comment) => {
               return (
                 <div className="comment" key={comment._id}>
-                  <div className="author">{comment.author.fullName}</div>
+                  <div className="author">{comment?.author?.fullName}</div>
                   <p className="content">{comment.content}</p>
                 </div>
               );
