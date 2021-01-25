@@ -5,4 +5,7 @@ const arrayBufferToBase64 = (buffer) => {
   return window.btoa(binary);
 };
 
-export default arrayBufferToBase64;
+const imageBufferDataToString = (data) =>
+  `data:image/jpeg;base64,${arrayBufferToBase64(data)}`;
+
+export default imageBufferDataToString;

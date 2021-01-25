@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { UserCard } from "./UserCard";
 
 // change to rel path
-import arrayBufferToBase64 from "../../arrayBufferToBase64";
+import imageBufferDataToString from "../../imageBufferDataToString";
 
 const UserIndex = () => {
   const [users, setUsers] = useState([]);
@@ -14,20 +14,17 @@ const UserIndex = () => {
     axios
       .get("/users")
       .then((res) => {
-        console.log(res.data.users);
+        //   set image if received
         res.data.users.forEach((user) => {
           if (user?.image) {
-            console.log(user.image.image.data);
-            user.image =
-              "data:image/jpeg;base64," +
-              arrayBufferToBase64(res.data.user.image.image.data);
+            user.image = imageBufferDataToString(user.image.image.data.data);
           }
         });
 
         setUsers(res.data.users);
         setError(res?.data.err);
       })
-      .catch((err) => setError(err.response.data.err));
+      .catch((err) => setError(err?.response?.data?.err || err?.response));
   }, []);
 
   useEffect(() => {

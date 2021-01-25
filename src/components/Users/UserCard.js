@@ -74,10 +74,10 @@ const UserCard = ({ user }) => {
       {error && <div className="error">{error}</div>}
 
       <div className="profilePic">
-        <img src={user?.image} alt="profile pic" />
+        <img src={user?.image} alt="profile pic" height={50} width={50} />
       </div>
       <Link to={`/users/${user._id}`}>
-        <div className="name">{user.fullName}</div>
+        <div className="name">{user?.fullName}</div>
       </Link>
       <div className="status">{StatusBtn(user.friendsStatus)}</div>
       <br></br>

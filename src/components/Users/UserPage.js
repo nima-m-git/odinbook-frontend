@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Post } from "../index";
 
 // change to rel path
-import arrayBufferToBase64 from "../../arrayBufferToBase64";
+import imageBufferDataToString from "../../imageBufferDataToString";
 
 const UserPage = () => {
   const { userId } = useParams();
@@ -17,11 +17,11 @@ const UserPage = () => {
       .get(`/users/${userId}`)
       .then((res) => {
         //  set image if received
-        res.data.user.image = res.data.user?.image
-          ? "data:image/jpeg;base64," +
-            arrayBufferToBase64(res.data.user.image.image.data.data)
-          : null;
-
+        if (res.data.user?.image) {
+          res.data.user.image = imageBufferDataToString(
+            res.data.user.image.image.data.data
+          );
+        }
         return setUser(res.data.user);
       })
       .catch((err) => setError(err.response?.data?.err || err.response));
