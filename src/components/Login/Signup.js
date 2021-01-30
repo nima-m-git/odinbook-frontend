@@ -14,21 +14,19 @@ const Signup = ({ closePopup }) => {
   });
 
   const handleChange = (e) => {
-    if (e.target.name == "image") {
+    if (e.target.name === "image") {
       console.log(e.target.files[0]);
     }
 
     setInputs((old) => ({
       ...old,
       [e.target.name]:
-        e.target.name == "image" ? e.target.files[0] : e.target.value,
+        e.target.name === "image" ? e.target.files[0] : e.target.value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log({ ...inputs });
 
     const formData = new FormData();
     for (let input in inputs) {

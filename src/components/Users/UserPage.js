@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Post } from "../index";
+import { ChangeImage } from "./ChangeImage";
 
 // change to rel path
 import imageBufferDataToString from "../../imageBufferDataToString";
@@ -11,30 +12,42 @@ const UserPage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const [changeImage, setChangeImage] = useState(false);
 
-  const getUser = useCallback(() => {
-    axios
-      .get(`/users/${userId}`)
-      .then((res) => {
-        //  set image if received
-        if (res.data.user?.image) {
-          res.data.user.image = imageBufferDataToString(
-            res.data.user.image.image.data.data
-          );
-        }
-        return setUser(res.data.user);
-      })
-      .catch((err) => setError(err.response?.data?.err || err.response));
+  const getUser = useCallback(async () => {
+    try {
+      const user = (await axios.get(`/users/${userId}`)).data.user;
+      //  set image if received
+      if (user?.image) {
+        user.image = imageBufferDataToString(user.image.image.data.data);
+      }
+
+      const currentUser = (await axios.get(`/users/me`)).data.user;
+      // set if current user
+      setIsCurrentUser(currentUser._id === user._id);
+
+      return setUser(user);
+    } catch (err) {
+      setError(err.response?.data?.err || err.response);
+    }
   }, [userId]);
 
   useEffect(() => getUser(), [getUser]);
 
   return (
     <div className="userPage">
+      {isCurrentUser && changeImage && (
+        <ChangeImage
+          exit={() => setChangeImage(false)}
+          refresh={getUser}
+          priorImage={!!user.image}
+        />
+      )}
       {error && <div className="error">{error}</div>}
       {user && (
         <div>
-          <div className="profilePic">
+          <div className="profilePic" onClick={() => setChangeImage(true)}>
             <img src={user?.image} alt="profile pic" width="80"></img>
           </div>
           <div className="fullName">{user.fullName}</div>
