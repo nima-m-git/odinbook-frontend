@@ -1,4 +1,11 @@
+$header-height: 100px;
+
 .header {
+  position: fixed;
+  height: $header-height;
+  left: 0;
+  right: 0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,6 +28,7 @@ h1,
 
 .navbar {
   text-align: end;
+  display: flex;
 
   .link {
     cursor: pointer;
@@ -29,6 +37,16 @@ h1,
     width: 70px;
     font-size: 18px;
     margin: 0.8em;
+
+    .profilePic {
+      display: flex;
+      width: fit-content;
+
+      .usersName {
+        margin-right: 5px;
+        width: fit-content;
+      }
+    }
 
     &:hover {
       color: rgb(150, 150, 150);

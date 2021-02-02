@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { PostForm } from "./PostForm";
 import { Post } from "./Post";
+import "./Posts.scss";
 
 const PostIndex = () => {
   const [posts, setPosts] = useState([]);

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 
 import { Post } from "./Post";
+import "./Posts.scss";
 
 const PostPage = () => {
   const [post, setPost] = useState();

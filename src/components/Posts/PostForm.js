@@ -22,13 +22,12 @@ const PostForm = ({ refresh }) => {
   return (
     <form className="postForm" onSubmit={handleSubmit}>
       <label>
-        Whats on your mind?
         <textarea
           onChange={(e) => setContent(e.target.value)}
           value={content}
-          rows={5}
-          // cols={40}
+          rows={2}
           maxLength={500}
+          placeholder="Whats on your mind?"
         />
       </label>
       <button className="submit-btn">Submit</button>

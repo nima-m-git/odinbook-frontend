@@ -26,32 +26,33 @@ const Login = ({ setHeaders }) => {
   };
 
   return (
-    <div>
+    <div className="login">
+      <header>Nimabook</header>
       <form className="login-form" onSubmit={checkCredentials}>
-        <h2 className="form-title">Login</h2>
         {error && <div className="error">- {error}</div>}
         <label>
-          Email:
           <input
             type="email"
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
           />
         </label>
         <label>
-          Password:
           <input
             type="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
           />
         </label>
-        <button type="submit">Submit</button>
-        <div className="signup-btn" onClick={() => setSignupPopup(true)}>
+        <button className="submit-btn">Log In</button>
+        <div className="line" />
+        <button className="signup-btn" onClick={() => setSignupPopup(true)}>
           Sign Up
-        </div>
+        </button>
       </form>
       {signupPopup && <Signup closePopup={() => setSignupPopup(false)} />}
     </div>

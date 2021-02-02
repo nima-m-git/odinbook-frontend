@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CommentBox } from "./CommentBox";
 
+import imageBufferDataToString from "../../imageBufferDataToString";
+
 const ExpandLikes = ({ post }) => (
   <div className="expanded-likes">
     {post?.likes
@@ -23,13 +25,22 @@ const Post = ({ refresh, post }) => {
   };
 
   return (
-    <div
-      className="post"
-      style={{ border: "1px solid black", width: "500px", margin: "2em" }}
-    >
+    <div className="post">
       <div className="post-info">
         <Link to={`/users/${post.author._id}`}>
-          <div className="author">{post.author.fullName}</div>
+          <div className="profilePic">
+            <div className="auth">{post.author.fullName}</div>
+            {post.author?.image && (
+              <img
+                src={
+                  imageBufferDataToString(post.author.image) ||
+                  "https://fertilitynetworkuk.org/wp-content/uploads/2017/01/Facebook-no-profile-picture-icon-620x389.jpg"
+                }
+                alt="profile pic"
+                width="50"
+              ></img>
+            )}
+          </div>
         </Link>
 
         <p className="content">{post.content}</p>

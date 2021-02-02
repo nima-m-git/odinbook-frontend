@@ -33,22 +33,24 @@ const App = () => {
       {!loggedIn ? (
         <Login {...{ setHeaders }} />
       ) : (
-        <div className="container">
+        <div>
           <HeaderNav logout={() => setLoggedIn(false)} />
-          <Switch>
-            <Route path={["/", "/posts"]} exact>
-              <PostIndex />
-            </Route>
-            <Route path="/posts/:postId">
-              <PostPage />
-            </Route>
-            <Route path="/users" exact>
-              <UserIndex />
-            </Route>
-            <Route path="/users/:userId">
-              <UserPage />
-            </Route>
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route path={["/", "/posts"]} exact>
+                <PostIndex />
+              </Route>
+              <Route path="/posts/:postId">
+                <PostPage />
+              </Route>
+              <Route path="/users" exact>
+                <UserIndex />
+              </Route>
+              <Route path="/users/:userId">
+                <UserPage />
+              </Route>
+            </Switch>
+          </div>
         </div>
       )}
     </div>

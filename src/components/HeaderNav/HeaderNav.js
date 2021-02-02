@@ -37,10 +37,10 @@ const HeaderNav = ({ logout }) => {
         <Link className="link" to={`/users/${user._id}`}>
           {user?.image && (
             <div className="profilePic">
-              <img src={user.image} alt="profile pic" width="40"></img>
+              <div className="usersName">{user.fullName}</div>
+              <img src={user.image} alt="profile pic" width="50"></img>
             </div>
           )}
-          {user.fullName}
         </Link>
         <div className="link" onClick={logout}>
           Logout
