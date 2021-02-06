@@ -8,4 +8,6 @@ const arrayBufferToBase64 = (buffer) => {
 const imageBufferDataToString = (data) =>
   `data:image/jpeg;base64,${arrayBufferToBase64(data)}`;
 
-export default imageBufferDataToString;
+const base64ToString = (base64) => `data:image/jpeg;base64,${base64}`;
+
+export { imageBufferDataToString, base64ToString };

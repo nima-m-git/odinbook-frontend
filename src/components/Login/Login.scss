@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
   width: 400px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
@@ -13,6 +14,11 @@
   margin: 0 auto;
   border-radius: 15px;
   background: white;
+
+  h2 {
+    margin: 0;
+    font-weight: 500;
+  }
 
   label {
     display: flex;
@@ -32,7 +38,7 @@
 }
 
 .login-form {
-  margin: 30px auto;
+  margin: 0 auto;
 }
 
 .form-title {
@@ -62,4 +68,13 @@
   font-size: 38px;
   text-align: center;
   margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.exit-btn {
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }

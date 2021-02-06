@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./HeaderNav.scss";
 
-import imageBufferDataToString from "../../imageBufferDataToString";
+import { base64ToString } from "../../imageBufferDataToString";
 
 const HeaderNav = ({ logout }) => {
   const [user, setUser] = useState(true);
@@ -14,10 +14,14 @@ const HeaderNav = ({ logout }) => {
       .get("/users/me")
       .then((res) => {
         const user = res.data.user;
+
         // set image if received
         if (user?.image) {
-          user.image = imageBufferDataToString(user.image.image.data.data);
+          user.image = base64ToString(user.image.image.data);
         }
+
+        console.log(user.image);
+
         setUser(user);
       })
       .catch((err) => console.log(err?.response?.data?.err || err.request));

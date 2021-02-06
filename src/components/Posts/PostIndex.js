@@ -13,7 +13,6 @@ const PostIndex = () => {
     axios
       .get("/posts")
       .then((res) => {
-        console.log(res);
         setPosts(res.data.posts);
         setError(res?.data.err);
       })

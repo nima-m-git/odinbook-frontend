@@ -6,7 +6,7 @@ import { Post } from "../index";
 import { ChangeImage } from "./ChangeImage";
 
 // change to rel path
-import imageBufferDataToString from "../../imageBufferDataToString";
+import { base64ToString } from "../../imageBufferDataToString";
 
 const UserPage = () => {
   const { userId } = useParams();
@@ -20,7 +20,7 @@ const UserPage = () => {
       const user = (await axios.get(`/users/${userId}`)).data.user;
       //  set image if received
       if (user?.image) {
-        user.image = imageBufferDataToString(user.image.image.data.data);
+        user.image = base64ToString(user.image.image.data);
       }
 
       const currentUser = (await axios.get(`/users/me`)).data.user;

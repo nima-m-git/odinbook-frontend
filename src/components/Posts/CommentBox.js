@@ -35,12 +35,12 @@ const CommentBox = ({ postId, refresh }) => {
         <textarea
           onChange={(e) => setComment(e.target.value)}
           value={comment}
-          rows={5}
+          rows={1}
           cols={40}
           maxLength={300}
         />
       </label>
-      <button type="submit">Submit</button>
+      <button className="submit-btn">Submit</button>
       {errors && errors.map((error) => <div className="error">{error}</div>)}
     </form>
   );

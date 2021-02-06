@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { UserCard } from "./UserCard";
 
 // change to rel path
-import imageBufferDataToString from "../../imageBufferDataToString";
+import { base64ToString } from "../../imageBufferDataToString";
 
 const UserIndex = () => {
   const [users, setUsers] = useState([]);
@@ -17,7 +17,7 @@ const UserIndex = () => {
         //   set image if received
         res.data.users.forEach((user) => {
           if (user?.image) {
-            user.image = imageBufferDataToString(user.image.image.data.data);
+            user.image = base64ToString(user.image.image.data);
           }
         });
 

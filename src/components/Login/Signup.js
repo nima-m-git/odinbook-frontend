@@ -14,10 +14,6 @@ const Signup = ({ closePopup }) => {
   });
 
   const handleChange = (e) => {
-    if (e.target.name === "image") {
-      console.log(e.target.files[0]);
-    }
-
     setInputs((old) => ({
       ...old,
       [e.target.name]:
@@ -34,18 +30,11 @@ const Signup = ({ closePopup }) => {
     }
 
     axios
-      .post(
-        "/signup",
-        formData,
-        {}
-        // {
-        //   ...inputs,
-        // }
-      )
+      .post("/signup", formData, {})
       .then((result) => {
         setMessage(result?.data.message);
-        console.log(result);
 
+        // rm conditional?
         if (result?.errors) {
           setErrors([...result?.errors]);
         } else {
@@ -66,62 +55,71 @@ const Signup = ({ closePopup }) => {
       encType="multipart/form-data"
     >
       <h2 className="form-title">Signup</h2>
+      <img
+        className="exit-btn"
+        src="https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/TdCEremeWv5.png"
+        alt=""
+        onClick={closePopup}
+      />
       {errors.map((error, i) => (
         <div className="error" key={i}>
           - {error.msg}
         </div>
       ))}
       {message && <div className="message">{message}</div>}
+      <div className="line" />
       <label>
-        First Name:
         <input
           type="text"
           name="firstName"
           value={inputs.firstName}
           onChange={handleChange}
+          placeholder="First Name"
         />
       </label>
       <label>
-        Last Name:
         <input
           type="text"
           name="lastName"
           value={inputs.lastName}
           onChange={handleChange}
+          placeholder="Last Name"
         />
       </label>
       <label>
-        Email:
         <input
           type="email"
           name="email"
           value={inputs.email}
           onChange={handleChange}
+          placeholder="Email"
         />
       </label>
       <label>
-        Password:
         <input
           type="password"
           name="password"
           value={inputs.password}
           onChange={handleChange}
+          placeholder="Password"
         />
       </label>
       <label>
-        Confirm Password:
         <input
           type="password"
           name="confirmPassword"
           value={inputs.confirmPassword}
           onChange={handleChange}
+          placeholder="Confirm Password"
         />
       </label>
       <label>
         Profile Picture
         <input type="file" name="image" onChange={handleChange}></input>
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" className="signup-btn">
+        Sign Up
+      </button>
     </form>
   );
 };

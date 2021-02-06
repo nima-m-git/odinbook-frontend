@@ -3,15 +3,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CommentBox } from "./CommentBox";
 
-import imageBufferDataToString from "../../imageBufferDataToString";
+import { base64ToString } from "../../imageBufferDataToString";
 
 const ExpandLikes = ({ post }) => (
   <div className="expanded-likes">
-    {post?.likes
-      .map((like) => like.author.fullName)
-      .map((fName) => (
-        <li>{fName}</li>
-      ))}
+    {post?.likes.map((like, i) => (
+      <li key={i}>{like.fullName}</li>
+    ))}
   </div>
 );
 
@@ -20,8 +18,14 @@ const Post = ({ refresh, post }) => {
 
   const likePost = async (e) => {
     e.preventDefault();
-    await axios.put(`/${post._id}/like`);
-    refresh();
+    try {
+      await axios
+        .post(`/posts/${post._id}/like`)
+        .then((res) => console.log(res.data.msg));
+      refresh();
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
   return (
@@ -33,7 +37,7 @@ const Post = ({ refresh, post }) => {
             {post.author?.image && (
               <img
                 src={
-                  imageBufferDataToString(post.author.image) ||
+                  base64ToString(post.author.image) ||
                   "https://fertilitynetworkuk.org/wp-content/uploads/2017/01/Facebook-no-profile-picture-icon-620x389.jpg"
                 }
                 alt="profile pic"
@@ -46,7 +50,7 @@ const Post = ({ refresh, post }) => {
         <p className="content">{post.content}</p>
         <div className="flex-bar">
           <button className="like" onClick={likePost}>
-            {post.liked}
+            {!!post.liked ? "unlike" : "like"}
           </button>
           <div className="likes">
             <button
@@ -54,7 +58,7 @@ const Post = ({ refresh, post }) => {
               onMouseEnter={() => setExpandLikes(true)}
               onMouseLeave={() => setExpandLikes(false)}
             >
-              Likes ({post?.likes?.count || "0"})
+              Likes ({post?.likes?.length || "0"})
             </button>
             {expandLikes && <ExpandLikes {...{ post }} />}
           </div>

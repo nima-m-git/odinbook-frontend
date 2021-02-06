@@ -28,33 +28,40 @@ const Login = ({ setHeaders }) => {
   return (
     <div className="login">
       <header>Nimabook</header>
-      <form className="login-form" onSubmit={checkCredentials}>
-        {error && <div className="error">- {error}</div>}
-        <label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-          />
-        </label>
-        <label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-        </label>
-        <button className="submit-btn">Log In</button>
-        <div className="line" />
-        <button className="signup-btn" onClick={() => setSignupPopup(true)}>
-          Sign Up
-        </button>
-      </form>
-      {signupPopup && <Signup closePopup={() => setSignupPopup(false)} />}
+      {signupPopup ? (
+        <Signup closePopup={() => setSignupPopup(false)} />
+      ) : (
+        <form className="login-form" onSubmit={checkCredentials}>
+          {error && <div className="error">- {error}</div>}
+          <label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+          </label>
+          <label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+          </label>
+          <button className="submit-btn">Log In</button>
+          <div className="line" />
+          <button
+            type="button"
+            className="signup-btn"
+            onClick={() => setSignupPopup(true)}
+          >
+            Sign Up
+          </button>
+        </form>
+      )}
     </div>
   );
 };
