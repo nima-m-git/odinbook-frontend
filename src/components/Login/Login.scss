@@ -2,18 +2,12 @@
 
 .login-form,
 .signup-form {
+  @include fb-box;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   position: relative;
   width: 400px;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
-    rgba(0, 0, 0, 0.1) 0px 8px 16px 0px;
-  padding: 1.5em;
-  margin: 0 auto;
-  border-radius: 15px;
-  background: white;
 
   h2 {
     margin: 0;
@@ -31,7 +25,7 @@
     margin-top: 5px;
     border-radius: 5px;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
-    background: rgb(255, 251, 251);
+    background: $input-grey;
     padding: 0.5em 0.8em;
     font-size: 18px;
   }

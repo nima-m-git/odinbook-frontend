@@ -2,3 +2,30 @@ $line-grey: rgb(218, 221, 225);
 $fb-green: rgb(66, 183, 42);
 $fb-logo-blue: rgb(24, 119, 242);
 $input-grey: rgb(245, 246, 247);
+
+@mixin fb-box {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(0, 0, 0, 0.1) 0px 8px 16px 0px;
+  padding: 1.5em;
+  margin: 0 auto;
+  border-radius: 15px;
+  background: white;
+}
+
+@mixin btn($background, $hover) {
+  background: $background;
+  width: 100%;
+  height: 50px;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+
+  &:hover {
+    background: $hover;
+  }
+}
+
+@mixin submit-btn {
+  @include btn(rgb(24, 119, 242), #156cdd);
+}

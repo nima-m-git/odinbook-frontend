@@ -1,0 +1,57 @@
+@import "../vars.scss";
+
+.user-card {
+  @include fb-box;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 320px;
+  height: 100px;
+  margin: 10px 0;
+  padding: 10px 20px;
+}
+
+.profileInfo {
+  text-align: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & > * {
+    height: fit-content;
+  }
+
+  .status {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+
+    button {
+      height: 30px;
+      font-size: 16px;
+    }
+  }
+
+  .confirmFriend-status {
+    @include btn($fb-green, rgb(19, 165, 19));
+  }
+
+  .rejectFriend-status {
+    @include btn(red, rgb(228, 19, 19));
+  }
+
+  .addFriend-status {
+    @include submit-btn;
+  }
+
+  .respondFriend-status > * {
+    display: inline-block;
+    margin-left: 10px;
+    width: 80px;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+}

@@ -20,8 +20,6 @@ const HeaderNav = ({ logout }) => {
           user.image = base64ToString(user.image.image.data);
         }
 
-        console.log(user.image);
-
         setUser(user);
       })
       .catch((err) => console.log(err?.response?.data?.err || err.request));
@@ -42,7 +40,12 @@ const HeaderNav = ({ logout }) => {
           {user?.image && (
             <div className="profilePic">
               <div className="usersName">{user.fullName}</div>
-              <img src={user.image} alt="profile pic" width="50"></img>
+              <img
+                src={user?.image || "/empty_profile.png"}
+                alt="profile pic"
+                width="50"
+                height="50"
+              ></img>
             </div>
           )}
         </Link>

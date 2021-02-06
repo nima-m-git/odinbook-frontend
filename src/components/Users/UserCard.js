@@ -2,6 +2,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 
+import "./Users.scss";
+
 const UserCard = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
@@ -38,33 +40,47 @@ const UserCard = ({ user }) => {
       case "denied":
       case undefined:
         return (
-          <div className="addFriend-status" onClick={() => addFriend(user._id)}>
+          <button
+            type="button"
+            className="addFriend-status"
+            onClick={() => addFriend(user._id)}
+          >
             Add Friend
-          </div>
+          </button>
         );
       case "received":
         return (
           <div className="respondFriend-status">
-            <div
+            <button
+              type="button"
               className="confirmFriend-status"
               onClick={() => respondRequest("accepted")}
             >
               Confirm
-            </div>
-            <div
+            </button>
+            <button
+              type="button"
               className="rejectFriend-status"
               onClick={() => respondRequest("denied")}
             >
               Reject
-            </div>
+            </button>
           </div>
         );
       case "accepted":
-        return <div className="friends-status">Friends</div>;
+        return (
+          <button type="button" className="friends-status">
+            Friends
+          </button>
+        );
       case "pending":
-        return <div className="pending-status">Pending..</div>;
+        return (
+          <button type="button" className="pending-status">
+            Pending..
+          </button>
+        );
       default:
-        return <div className="no-status"></div>;
+        return <button type="button" className="no-status"></button>;
     }
   };
 
@@ -74,13 +90,20 @@ const UserCard = ({ user }) => {
       {error && <div className="error">{error}</div>}
 
       <div className="profilePic">
-        <img src={user?.image} alt="profile pic" height={50} width={50} />
+        <img
+          src={user?.image || "/empty_profile.png"}
+          alt="profile pic"
+          height={50}
+          width={50}
+        />
       </div>
-      <Link to={`/users/${user._id}`}>
-        <div className="name">{user?.fullName}</div>
-      </Link>
-      <div className="status">{StatusBtn(user.friendsStatus)}</div>
-      <br></br>
+      <div className="profileInfo">
+        <Link to={`/users/${user._id}`}>
+          <div className="name">{user?.fullName}</div>
+        </Link>
+        <div className="status">{StatusBtn(user.friendsStatus)}</div>
+        <br></br>
+      </div>
     </div>
   );
 };
