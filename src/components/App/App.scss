@@ -48,9 +48,12 @@ img {
 }
 
 // Commons
-.submit-btn,
-.signup-btn {
+.submit-btn {
   @include submit-btn;
+}
+
+.signup-btn {
+  @include btn($fb-green, rgb(0, 160, 0));
 }
 
 button {
@@ -67,4 +70,11 @@ button {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.name,
+.usersName,
+.author {
+  text-transform: capitalize;
+  font-weight: 700;
 }

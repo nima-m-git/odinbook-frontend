@@ -28,24 +28,27 @@ h1,
 }
 
 .navbar {
-  text-align: end;
   display: flex;
 
   .link {
     cursor: pointer;
     text-decoration: none;
     transition: font-size 0.3s;
-    width: 70px;
+    width: fit-content;
     font-size: 18px;
-    margin: 0.8em;
+    font-weight: 600;
+    margin: 10px;
+    align-self: center;
 
     .profilePic {
       display: flex;
+      flex-direction: rows;
       width: fit-content;
 
       .usersName {
         margin-right: 5px;
-        width: fit-content;
+        white-space: nowrap;
+        align-self: center;
       }
     }
 

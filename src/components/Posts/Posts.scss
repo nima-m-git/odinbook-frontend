@@ -1,3 +1,5 @@
+@import "../vars.scss";
+
 .postForm {
   display: flex;
   flex-direction: column;
@@ -16,5 +18,37 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
     background: white;
     padding: 16px;
+  }
+}
+
+.post {
+  .likes {
+    position: relative;
+  }
+
+  .expanded-likes {
+    @include fb-box;
+    position: absolute;
+
+    li {
+      white-space: nowrap;
+      list-style: none;
+    }
+  }
+
+  .comment {
+    background: $input-grey;
+    border-radius: 15px;
+    padding: 7px 10px;
+    margin: 20px 10px;
+    height: fit-content;
+  }
+
+  .content {
+    margin-bottom: 0;
+  }
+
+  .comment-box {
+    margin-top: 10px;
   }
 }

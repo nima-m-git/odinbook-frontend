@@ -15,6 +15,7 @@ const PostIndex = () => {
       .then((res) => {
         setPosts(res.data.posts);
         setError(res?.data.err);
+        console.log(posts);
       })
       .catch((err) => setError(err));
   };

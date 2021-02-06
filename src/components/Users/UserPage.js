@@ -26,8 +26,7 @@ const UserPage = () => {
       const currentUser = (await axios.get(`/users/me`)).data.user;
       // set if current user
       setIsCurrentUser(currentUser._id === user._id);
-
-      return setUser(user);
+      setUser(user);
     } catch (err) {
       setError(err.response?.data?.err || err.response);
     }
@@ -48,7 +47,11 @@ const UserPage = () => {
       {user && (
         <div>
           <div className="profilePic" onClick={() => setChangeImage(true)}>
-            <img src={user?.image} alt="profile pic" width="80"></img>
+            <img
+              src={user?.image || "/empty_profile.png"}
+              alt="profile pic"
+              width="80"
+            ></img>
           </div>
           <div className="fullName">{user.fullName}</div>
           <div className="posts-container">

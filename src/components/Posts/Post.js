@@ -33,7 +33,7 @@ const Post = ({ refresh, post }) => {
       <div className="post-info">
         <Link to={`/users/${post.author._id}`}>
           <div className="profilePic">
-            <div className="auth">{post.author.fullName}</div>
+            <div className="author">{post.author.fullName}</div>
             {post.author?.image && (
               <img
                 src={
@@ -52,6 +52,7 @@ const Post = ({ refresh, post }) => {
           <button className="like" onClick={likePost}>
             {!!post.liked ? "unlike" : "like"}
           </button>
+
           <div className="likes">
             <button
               className="number-likes"
@@ -66,7 +67,7 @@ const Post = ({ refresh, post }) => {
       </div>
       <div className="comments">
         <CommentBox {...{ refresh }} postId={post._id} />
-        {post.comments.length &&
+        {post.comments &&
           [...post.comments]
             .sort((a, b) => (a.dateAdded > b.dateAdded ? 1 : -1))
             .map((comment) => {
