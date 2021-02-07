@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { PostForm } from "./PostForm";
 import { Post } from "./Post";
@@ -9,20 +9,19 @@ const PostIndex = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
 
-  const getPosts = () => {
+  const getPosts = useCallback(() => {
     axios
       .get("/posts")
       .then((res) => {
         setPosts(res.data.posts);
         setError(res?.data.err);
-        console.log(posts);
       })
       .catch((err) => setError(err));
-  };
+  }, []);
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [getPosts]);
 
   return (
     <div className="posts-container">

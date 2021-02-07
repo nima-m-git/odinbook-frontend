@@ -25,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     // axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
-    axios.defaults.baseURL = "http://localhost:3000/";
+    axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
   }, []);
 
   return (
