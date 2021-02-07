@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/odinbook_frontend/static/css/main.99d86591.chunk.css",
-    "main.js": "/odinbook_frontend/static/js/main.3072630f.chunk.js",
-    "main.js.map": "/odinbook_frontend/static/js/main.3072630f.chunk.js.map",
-    "runtime-main.js": "/odinbook_frontend/static/js/runtime-main.d405d74e.js",
-    "runtime-main.js.map": "/odinbook_frontend/static/js/runtime-main.d405d74e.js.map",
-    "static/js/2.4c51c97b.chunk.js": "/odinbook_frontend/static/js/2.4c51c97b.chunk.js",
-    "static/js/2.4c51c97b.chunk.js.map": "/odinbook_frontend/static/js/2.4c51c97b.chunk.js.map",
-    "index.html": "/odinbook_frontend/index.html",
-    "static/css/main.99d86591.chunk.css.map": "/odinbook_frontend/static/css/main.99d86591.chunk.css.map",
-    "static/js/2.4c51c97b.chunk.js.LICENSE.txt": "/odinbook_frontend/static/js/2.4c51c97b.chunk.js.LICENSE.txt"
+    "main.css": "/odinbook-frontend/static/css/main.99d86591.chunk.css",
+    "main.js": "/odinbook-frontend/static/js/main.3072630f.chunk.js",
+    "main.js.map": "/odinbook-frontend/static/js/main.3072630f.chunk.js.map",
+    "runtime-main.js": "/odinbook-frontend/static/js/runtime-main.9171252a.js",
+    "runtime-main.js.map": "/odinbook-frontend/static/js/runtime-main.9171252a.js.map",
+    "static/js/2.4c51c97b.chunk.js": "/odinbook-frontend/static/js/2.4c51c97b.chunk.js",
+    "static/js/2.4c51c97b.chunk.js.map": "/odinbook-frontend/static/js/2.4c51c97b.chunk.js.map",
+    "index.html": "/odinbook-frontend/index.html",
+    "static/css/main.99d86591.chunk.css.map": "/odinbook-frontend/static/css/main.99d86591.chunk.css.map",
+    "static/js/2.4c51c97b.chunk.js.LICENSE.txt": "/odinbook-frontend/static/js/2.4c51c97b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d405d74e.js",
+    "static/js/runtime-main.9171252a.js",
     "static/js/2.4c51c97b.chunk.js",
     "static/css/main.99d86591.chunk.css",
     "static/js/main.3072630f.chunk.js"
