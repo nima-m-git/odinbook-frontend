@@ -10,7 +10,7 @@ const Signup = ({ closePopup }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    image: null,
+    // image: "",
   });
 
   const handleChange = (e) => {
@@ -32,7 +32,7 @@ const Signup = ({ closePopup }) => {
     axios
       .post("/signup", formData, {})
       .then((result) => {
-        setMessage(result?.data.message);
+        setMessage(result?.data?.message);
 
         // rm conditional?
         if (result?.errors) {
@@ -43,8 +43,8 @@ const Signup = ({ closePopup }) => {
         }
       })
       .catch((err) => {
-        console.log(err.response.data.err || err.response);
-        setErrors([...err.response?.data?.errors] || err.response);
+        console.log(err.response);
+        // setErrors([...err?.response?.data?.errors] || err?.response || err);
       });
   };
 
